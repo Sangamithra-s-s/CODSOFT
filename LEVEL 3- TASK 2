@@ -1,0 +1,66 @@
+const express = require('express');
+const mongoose = require('mongoose');
+const cors = require('cors');
+const dotenv = require('dotenv');
+
+dotenv.config();
+
+const app = express();
+app.use(cors());
+app.use(express.json());
+
+mongoose.connect(process.env.MONGODB_URI, {
+  useNewUrlParser: true,
+  useUnifiedTopology: true,
+});
+
+const productSchema = new mongoose.Schema({
+  name: String,
+  type: String,
+  description: String,
+  price: Number,
+  image: String,
+});
+
+const Product = mongoose.model('Product', productSchema);
+
+// Fetch all products from the database
+app.get('/products', async (req, res) => {
+  try {
+    const allProducts = await Product.find();
+    res.json(allProducts);
+  } catch (error) {
+    console.error(error);
+    res.status(500).json({ error: 'Internal Server Error' });
+  }
+});
+
+// Add a new product to the database
+app.post('/products', async (req, res) => {
+  try {
+    const newProduct = new Product(req.body);
+    await newProduct.save();
+    res.status(201).json(newProduct);
+  } catch (error) {
+    console.error(error);
+    res.status(500).json({ error: 'Internal Server Error' });
+  }
+});
+
+// Update a product in the database
+app.put('/products/:id', async (req, res) => {
+  try {
+    const updatedProduct = await Product.findByIdAndUpdate(
+      req.params.id,
+      req.body,
+      { new: true }
+    );
+    res.json(updatedProduct);
+  } catch (error) {
+    console.error(error);
+    res.status(500).json({ error: 'Internal Server Error' });
+  }
+});
+
+// Delete a product from the database
+app.delete('/products/:id', async (req, res) => {
