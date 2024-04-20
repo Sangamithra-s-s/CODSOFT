@@ -2,9 +2,7 @@ Step 1: Set up the project structure
 Create a new directory for your project and navigate into it. Then, create the following directories and files:
 
 css
-Edit
-Full Screen
-Copy code
+
 my-ecommerce-site/
 ├── client/
 │   ├── package.json
@@ -26,18 +24,14 @@ my-ecommerce-site/
 Step 2: Set up the React client
 Inside the client directory, initialize a new React app using create-react-app:
 
-Edit
-Full Screen
-Copy code
+
 npx create-react-app client
 Then, create the necessary components inside the components directory.
 
 Step 3: Set up the Node.js server
 Inside the server directory, initialize a new Node.js app using npm init. Then, install the necessary dependencies:
 
-Edit
-Full Screen
-Copy code
+
 npm install express mongoose cors dotenv
 Create a server.js file and set up an Express server that connects to your MongoDB database.
 
@@ -60,9 +54,7 @@ Here's an example of what the code for some of these components might look like:
 
 ProductList.js
 jsx
-Edit
-Full Screen
-Copy code
+
 import React from 'react';
 import ProductItem from './ProductItem';
 
@@ -79,9 +71,7 @@ const ProductList = ({ products }) => {
 export default ProductList;
 ShoppingCart.js
 jsx
-Edit
-Full Screen
-Copy code
+
 import React from 'react';
 import { useSelector } from 'react-redux';
 
@@ -106,9 +96,7 @@ const ShoppingCart = () => {
 export default ShoppingCart;
 server.js
 js
-Edit
-Full Screen
-Copy code
+
 const express = require('express');
 const mongoose = require('mongoose');
 const cors = require('cors');
